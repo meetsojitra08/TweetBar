@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-s#u^=hg@sgqzc3oyw7k66ygo0^-oupjzcepgvbhj!l+acd-gm^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://tweetbar-share-your-thoughts.onrender.com"]
 
 
 # Application definition

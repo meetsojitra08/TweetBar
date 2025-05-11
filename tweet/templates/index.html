@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+TweetBar - Share Your Thoughts
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-5 fw-bold">Share your thoughts with the world—one tweet at a time!</h1>
+        <p class="lead mt-3">Share your thoughts, post a tweet, and explore what others are saying!</p>
+        <a href="{% url 'tweet_create' %}" class="btn btn-primary btn-lg mt-4">
+            <i class="bi bi-pencil-square"></i> Create Your First Tweet
+        </a>
+    </div>
+</div>
+{% endblock %}

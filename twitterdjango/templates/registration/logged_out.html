@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="wrapper">
+    <div class="logo">
+        <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" alt="Logo">
+    </div>
+    <div class="text-center mt-4 name">
+        TweetBar
+    </div>
+    <h2 class="text-center mt-4">You have been logged out</h2>
+    <div class="text-center mt-4 fs-6">
+        <p>To continue, <a href="{% url 'login' %}">Login here</a></p>
+    </div>
+</div>{% extends "layout.html" %}
+
+{% block content %}
+<h2>Logged out</h2>
+
+<p>You have been logged out<a href="{% url 'login' %}">Login here here</a>></p>
+
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+TweetBar - Search Results
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<h1 class="text-center mt-4">Search Results for "{{ query }}"</h1>
+
+{% if results %}
+  <div class="container row gap-3">
+    {% for tweet in results %}
+      <div class="card" style="width: 18rem;">
+        {% if tweet.photo %}
+          <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet image">
+        {% else %}
+          <img src="{% static 'images/default-image.jpg' %}" class="card-img-top" alt="Default image">
+        {% endif %}
+        
+        <div class="card-body">
+          <h5 class="card-title">{{ tweet.user.username }}</h5>
+          <p class="card-text">{{ tweet.text }}</p>
+          
+          {% if tweet.user == user %}
+            <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No tweets were found based on your search criteria. Please try again with different keywords. "{{ query }}".</p>
+{% endif %}
+
+{% endblock %}

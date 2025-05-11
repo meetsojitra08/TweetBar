@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+TweetBar - Explore the Latest Tweets
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-4">Discover the Latest Tweets and Share Your Thoughts with the World!</h1>
+
+<div class="d-flex justify-content-center mt-4 mb-4">
+    <a class="btn btn-lg btn-primary rounded-pill shadow-sm" href="{% url 'tweet_create' %}">
+        <i class="bi bi-pencil-square"></i> Create a Tweet
+    </a>
+</div>
+
+<style>
+    .masonry {
+        column-count: 1;
+        column-gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .masonry {
+            column-count: 2;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .masonry {
+            column-count: 3;
+        }
+    }
+
+    .tweet-card {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="container">
+    <div class="masonry">
+        {% for tweet in tweets %}
+        <div class="card tweet-card">
+            {% if tweet.photo %}
+            <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet Image" style="width: 100%; height: auto;">
+            {% else %}
+            <img src="{% static 'images/default-image.jpg' %}" class="card-img-top" alt="Default image" style="width: 100%; height: auto;">
+            {% endif %}
+
+            <div class="card-body">
+                <h5 class="card-title">{{ tweet.user.username }}</h5>
+                <p class="card-text">{{ tweet.text }}</p>
+
+                {% if tweet.user == user %}
+                <div class="d-flex justify-content-start mt-2">
+                    <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-outline-warning btn-sm me-2">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-outline-danger btn-sm">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="card-footer text-muted">
+                <small>Posted on: {{ tweet.created_at }}</small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

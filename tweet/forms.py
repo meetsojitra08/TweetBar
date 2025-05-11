@@ -20,13 +20,19 @@ from django.contrib.auth.models import User
 
      
 
+from django import forms
+from .models import Tweet
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+# Tweet form
 class TweetForm(forms.ModelForm):
     class Meta:
         model = Tweet
         fields = ['text', 'photo']
 
+# User registration form
 class UserRegistrationForm(UserCreationForm):
-    # Customizing the username field with additional attributes
     username = forms.CharField(
         widget=forms.TextInput(attrs={
             'placeholder': 'Username',
@@ -34,7 +40,6 @@ class UserRegistrationForm(UserCreationForm):
         })
     )
     
-    # Customizing the email field with additional attributes
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={
             'placeholder': 'Email',
@@ -42,16 +47,16 @@ class UserRegistrationForm(UserCreationForm):
         })
     )
     
-    # Customizing password1 field with additional attributes
     password1 = forms.CharField(
+        label='Password',
         widget=forms.PasswordInput(attrs={
             'placeholder': 'Password',
             'class': 'form-control rounded-pill p-3 bg-transparent text-light border-light'
         })
     )
     
-    # Customizing password2 field (confirm password) with additional attributes
     password2 = forms.CharField(
+        label='Confirm Password',
         widget=forms.PasswordInput(attrs={
             'placeholder': 'Confirm Password',
             'class': 'form-control rounded-pill p-3 bg-transparent text-light border-light'
